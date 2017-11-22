@@ -41,8 +41,8 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         
         if (username.isEmpty() || password.isEmpty()) {
-            request.setAttribute("errormessager", "fill in both fields, please");
-            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp/").forward(request, response);
+            request.setAttribute("errormessage", "fill in both fields, please");
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
         
         AccountService as = new AccountService();
@@ -54,8 +54,8 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("username", username);
             response.sendRedirect("home");
         } else {
-            request.setAttribute("errormessager", "invalid login");
-            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp/").forward(request, response);
+            request.setAttribute("errormessage", "invalid login");
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         }
     }
 }

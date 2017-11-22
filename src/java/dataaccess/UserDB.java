@@ -83,6 +83,39 @@ public class UserDB {
             em.close();
         }
     }
+    
+    public User getUserByEmail(String email) throws NotesDBException{
+        
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        
+        try{
+            User user = em.createNamedQuery("User.findByEmail", User.class).setParameter("email", email).getSingleResult();
+            return user;
+        }catch (Exception ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot get user", ex);
+            throw new NotesDBException("Error getting User");
+        } finally {
+            em.close();
+        }
+    }
+    
+    public User getUserByUUID(String uuid) throws NotesDBException{
+        
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        
+        System.out.println("--" + uuid + "--");
+        
+        try{
+            User user = em.createNamedQuery("User.findByResetPasswordUUID", User.class).setParameter("ResetPasswordUUID", uuid).getSingleResult();
+            return user;
+        }catch (Exception ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, "Cannot get user", ex);
+            throw new NotesDBException("Error getting User");
+        } finally {
+            em.close();
+        }
+    }
 
     public int delete(User user) throws NotesDBException {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

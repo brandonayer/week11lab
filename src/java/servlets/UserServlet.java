@@ -65,7 +65,7 @@ public class UserServlet extends HttpServlet {
                 String selectedUsername = request.getParameter("selectedUsername");
                 us.delete(selectedUsername);
             } else if (action.equals("edit")) {
-                us.update(username, password, email, active, firstname, lastname);
+                us.update(username, password, email, active, firstname, lastname, null);
             } else if (action.equals("add")) {
                 us.insert(username, password, email, active, firstname, lastname);
             }
